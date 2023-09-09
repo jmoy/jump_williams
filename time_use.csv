@@ -1,0 +1,9 @@
+plant,product,operation,time
+A,Standard,Grinding,4
+A,Deluxe,Grinding,2
+A,Standard,Polishing,2
+A,Deluxe,Polishing,5
+B,Standard,Grinding,5
+B,Deluxe,Grinding,3
+B,Standard,Polishing,5
+B,Deluxe,Polishing,6
