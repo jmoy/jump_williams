@@ -27,12 +27,12 @@ model = Model(HiGHS.Optimizer)
 @variable(model,nactive[i=1:NSlots,j=1:NTypes]>=0,Int)
 
 #No of generators newly started
-#The weird expression (NSlots+i-2)%NSlots+1 is the 
-#  index of previous slot, with the slot previous to 5
-#  being 1 as the day wraps around
 @variable(model,nstarted[i=1:NSlots,j=1:NTypes]>=0,Int)
 
 #Pinning down nstarted
+#The weird expression (NSlots+i-2)%NSlots+1 is the 
+#  index of previous slot, with the slot previous to 5
+#  being 1 as the day wraps around
 @constraint(model,active_start[i=1:NSlots,j=1:NTypes],
             nactive[(NSlots+i-2)%NSlots+1,j] + nstarted[i,j] >= nactive[i,j])
 
@@ -57,7 +57,7 @@ model = Model(HiGHS.Optimizer)
 @constraint(model,cpower_base[i=1:NSlots],
                 sum(power_avail[i,:])>=PowerReq[i])
 
-#Constraint, available power must meed surge need
+#Constraint, max power must meed surge need
 @constraint(model,cpower_surge[i=1:NSlots],
                     sum(power_max[i,:])>=(1+ExtraPowerReq) .* PowerReq[i])
 
